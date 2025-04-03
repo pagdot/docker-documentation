@@ -476,5 +476,6 @@ To help with development, we generate this dependency graph.
 
 ## Versions
 
+* **03.04.25:** - Update chromium launch options to improve performance.
 * **10.02.24:** - Update Readme with new env vars and ingest proper PWA icon.
 * **31.01.24:** - Initial release.
