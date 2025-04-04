@@ -479,4 +479,5 @@ To help with development, we generate this dependency graph.
 
 ## Versions
 
+* **03.04.25:** - Update chromium launch options to improve performance.
 * **25.07.24:** - Initial release.
