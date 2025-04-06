@@ -384,36 +384,33 @@ To help with development, we generate this dependency graph.
       init-migrations -> init-adduser
       init-os-end -> init-config
       init-config -> init-config-end
+      init-crontab-config -> init-config-end
       init-fail2ban-config -> init-config-end
-      init-os-end -> init-crontab-config
+      init-config -> init-crontab-config
       init-mods-end -> init-custom-files
       base -> init-envfile
       init-config -> init-fail2ban-config
       base -> init-migrations
-      base -> init-mods
       init-config-end -> init-mods
-      init-mods -> init-mods-end
       init-mods-package-install -> init-mods-end
       init-mods -> init-mods-package-install
-      base -> init-os-end
       init-adduser -> init-os-end
       init-envfile -> init-os-end
-      init-migrations -> init-os-end
       init-custom-files -> init-services
-      init-mods-end -> init-services
       init-services -> svc-cron
       svc-cron -> legacy-services
       init-services -> svc-fail2ban
       svc-fail2ban -> legacy-services
     }
     Base Images: {
-      "baseimage-alpine:3.20"
+      "baseimage-alpine:3.21"
     }
     "fail2ban:latest" <- Base Images
     ```
 
 ## Versions
 
+* **11.02.25:** - Rebase to Alpine 3.21.
 * **12.10.24:** - Rebase to Alpine 3.20.
 * **05.03.24:** - Rebase to Alpine 3.19.
 * **01.06.23:** - Add optional VERBOSITY environment variable, allowing users to set the container log verbosity.
