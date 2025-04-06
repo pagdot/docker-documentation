@@ -370,32 +370,27 @@ To help with development, we generate this dependency graph.
       init-nginx-end -> init-config
       init-os-end -> init-config
       init-config -> init-config-end
+      init-crontab-config -> init-config-end
       init-kimai-config -> init-config-end
-      init-os-end -> init-crontab-config
+      init-config -> init-crontab-config
       init-mods-end -> init-custom-files
       base -> init-envfile
       init-os-end -> init-folders
       init-php -> init-keygen
       init-nginx-end -> init-kimai-config
       base -> init-migrations
-      base -> init-mods
       init-config-end -> init-mods
-      init-version-checks -> init-mods
-      init-mods -> init-mods-end
       init-mods-package-install -> init-mods-end
       init-mods -> init-mods-package-install
       init-samples -> init-nginx
-      init-permissions -> init-nginx-end
-      base -> init-os-end
+      init-version-checks -> init-nginx-end
       init-adduser -> init-os-end
       init-envfile -> init-os-end
-      init-migrations -> init-os-end
       init-keygen -> init-permissions
       init-nginx -> init-php
       init-folders -> init-samples
       init-custom-files -> init-services
-      init-mods-end -> init-services
-      init-config-end -> init-version-checks
+      init-permissions -> init-version-checks
       init-services -> svc-cron
       svc-cron -> legacy-services
       init-services -> svc-nginx
@@ -404,13 +399,14 @@ To help with development, we generate this dependency graph.
       svc-php-fpm -> legacy-services
     }
     Base Images: {
-      "baseimage-alpine-nginx:3.20" <- "baseimage-alpine:3.20"
+      "baseimage-alpine-nginx:3.21" <- "baseimage-alpine:3.21"
     }
     "kimai:latest" <- Base Images
     ```
 
 ## Versions
 
+* **06.04.25:** - Rebase to Alpine 3.21.
 * **30.06.24:** - Rebase to Alpine 3.20. Existing users should update their nginx confs to avoid http2 deprecation warnings.
 * **24.03.24:** - Added LDAP module to composer
 * **06.03.24:** - Existing users should update: site-confs/default.conf - Cleanup default site conf.
