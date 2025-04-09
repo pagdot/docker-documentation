@@ -101,6 +101,7 @@ services:
       - EXEC=0 #optional
       - IMAGES=0 #optional
       - INFO=0 #optional
+      - LOG_LEVEL=info #optional
       - NETWORKS=0 #optional
       - NODES=0 #optional
       - PING=1 #optional
@@ -141,6 +142,7 @@ docker run -d \
   -e EXEC=0 `#optional` \
   -e IMAGES=0 `#optional` \
   -e INFO=0 `#optional` \
+  -e LOG_LEVEL=info `#optional` \
   -e NETWORKS=0 `#optional` \
   -e NODES=0 `#optional` \
   -e PING=1 `#optional` \
@@ -181,6 +183,7 @@ Containers are configured using parameters passed at runtime (such as those abov
 | `-e EXEC=0` | `/exec` & `/containers/{id}/exec` |
 | `-e IMAGES=0` | `/images` |
 | `-e INFO=0` | `/info` |
+| `-e LOG_LEVEL=info` | Possible values are: debug, info, notice, warning, err, crit, alert and emerg. Defaults to info. |
 | `-e NETWORKS=0` | `/networks` |
 | `-e NODES=0` | `/nodes` |
 | `-e PING=1` | `/_ping` |
@@ -318,6 +321,7 @@ Once registered you can define the dockerfile to use with `-f Dockerfile.aarch64
 
 ## Versions
 
+* **08.04.25:** - Add `LOG_LEVEL` back.
 * **06.04.25:** - Switch back to haproxy for better handling of `docker exec` connection hijacking.
 * **02.01.25:** - Support custom read timeout values.
 * **05.12.24:** - Rebase to Alpine 3.21.
