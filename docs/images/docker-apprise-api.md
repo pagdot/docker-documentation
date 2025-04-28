@@ -51,6 +51,14 @@ The architectures supported by this image are:
 | arm64 | ✅ | arm64v8-\<version tag\> |
 | armhf | ❌ | |
 
+## Read-Only Operation
+
+This image can be run with a read-only container filesystem. For details please [read the docs](https://docs.linuxserver.io/misc/read-only/).
+
+## Non-Root Operation
+
+This image can be run with a non-root user. For details please [read the docs](https://docs.linuxserver.io/misc/non-root/).
+
 ## Usage
 
 To help you get started creating a container from this image you can either use docker-compose or the docker cli.
