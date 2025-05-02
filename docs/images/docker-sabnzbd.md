@@ -53,13 +53,15 @@ Initial setup is done via `http://<your-ip>:8080`.
 
 See the [SABnzbd wiki](https://sabnzbd.org/wiki/) for more information.
 
-### Download folders
+### Media folders
 
-We have set `/incomplete-downloads` and `/downloads` as ***optional paths***, this is because it is the easiest way to get started. While easy to use, it has some drawbacks. Mainly losing the ability for atomic moves (TL;DR instant file moves, rather than copy+delete) of files while processing content.
+We have set `/incomplete-downloads` and `/downloads` as optional paths, this is because it is the easiest way to get started. While easy to use, it has some drawbacks. Mainly losing the ability to hardlink (TL;DR a way for a file to exist in multiple places on the same file system while only consuming one file worth of space), or atomic move (TL;DR instant file moves, rather than copy+delete) files while processing content.
 
-Use the optional paths if you don't understand, or don't want atomic moves. Whichever paths you choose to use, make sure to set the `Completed Download Folder` and the `Temporary Download Folder` in the SABnzbd gui settings, under `Folders`.
+Use the optional paths if you don't understand, or don't want hardlinks/atomic moves.
 
-The folks over at servarr.com wrote a good [write-up](https://wiki.servarr.com/docker-guide#consistent-and-well-planned-paths) on how to get started with this.
+??? tip "Well planned paths"
+
+    The folks over at servarr.com wrote a good [write-up](https://wiki.servarr.com/docker-guide#consistent-and-well-planned-paths) on how to get started with this.
 
 ## Read-Only Operation
 
@@ -91,8 +93,8 @@ services:
       - TZ=Etc/UTC
     volumes:
       - /path/to/sabnzbd/config:/config
-      - /path/to/downloads:/downloads #optional
       - /path/to/incomplete/downloads:/incomplete-downloads #optional
+      - /path/to/downloads:/downloads #optional
     ports:
       - 8080:8080
     restart: unless-stopped
@@ -108,8 +110,8 @@ docker run -d \
   -e TZ=Etc/UTC \
   -p 8080:8080 \
   -v /path/to/sabnzbd/config:/config \
-  -v /path/to/downloads:/downloads `#optional` \
   -v /path/to/incomplete/downloads:/incomplete-downloads `#optional` \
+  -v /path/to/downloads:/downloads `#optional` \
   --restart unless-stopped \
   lscr.io/linuxserver/sabnzbd:latest
 ```
@@ -137,8 +139,8 @@ Containers are configured using parameters passed at runtime (such as those abov
 | Volume | Function |
 | :----: | --- |
 | `/config` | Persistent config files |
-| `/downloads` | Local path for finished downloads. |
 | `/incomplete-downloads` | Local path for incomplete-downloads. |
+| `/downloads` | Local path for finished downloads. |
 
 #### Miscellaneous Options
 
