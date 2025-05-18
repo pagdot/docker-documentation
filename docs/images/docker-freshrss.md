@@ -300,6 +300,7 @@ To help with development, we generate this dependency graph.
       init-freshrss-config -> init-config-end
       init-os-end -> init-crontab-config
       init-mods-end -> init-custom-files
+      init-adduser -> init-device-perms
       base -> init-envfile
       init-os-end -> init-folders
       init-nginx-end -> init-freshrss-config
@@ -315,6 +316,7 @@ To help with development, we generate this dependency graph.
       init-permissions -> init-nginx-end
       base -> init-os-end
       init-adduser -> init-os-end
+      init-device-perms -> init-os-end
       init-envfile -> init-os-end
       init-migrations -> init-os-end
       init-keygen -> init-permissions
