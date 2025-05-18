@@ -323,6 +323,7 @@ To help with development, we generate this dependency graph.
       init-flexget-config -> init-config-end
       init-os-end -> init-crontab-config
       init-mods-end -> init-custom-files
+      init-adduser -> init-device-perms
       base -> init-envfile
       init-config -> init-flexget-config
       base -> init-migrations
@@ -333,6 +334,7 @@ To help with development, we generate this dependency graph.
       init-mods -> init-mods-package-install
       base -> init-os-end
       init-adduser -> init-os-end
+      init-device-perms -> init-os-end
       init-envfile -> init-os-end
       init-migrations -> init-os-end
       init-custom-files -> init-services
