@@ -321,12 +321,14 @@ To help with development, we generate this dependency graph.
       init-piper-config -> init-config-end
       init-config -> init-crontab-config
       init-mods-end -> init-custom-files
+      init-adduser -> init-device-perms
       base -> init-envfile
       base -> init-migrations
       init-config-end -> init-mods
       init-mods-package-install -> init-mods-end
       init-mods -> init-mods-package-install
       init-adduser -> init-os-end
+      init-device-perms -> init-os-end
       init-envfile -> init-os-end
       init-config -> init-piper-config
       init-custom-files -> init-services
