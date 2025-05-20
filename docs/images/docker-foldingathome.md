@@ -330,6 +330,7 @@ To help with development, we generate this dependency graph.
       init-foldingathome-video -> init-config-end
       init-config -> init-crontab-config
       init-mods-end -> init-custom-files
+      init-adduser -> init-device-perms
       base -> init-envfile
       init-config -> init-foldingathome-config
       init-foldingathome-config -> init-foldingathome-video
@@ -338,6 +339,7 @@ To help with development, we generate this dependency graph.
       init-mods-package-install -> init-mods-end
       init-mods -> init-mods-package-install
       init-adduser -> init-os-end
+      init-device-perms -> init-os-end
       init-envfile -> init-os-end
       init-custom-files -> init-services
       init-services -> svc-cron
