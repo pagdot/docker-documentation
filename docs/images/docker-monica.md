@@ -328,6 +328,7 @@ To help with development, we generate this dependency graph.
       init-monica-config -> init-config-end
       init-config -> init-crontab-config
       init-mods-end -> init-custom-files
+      init-adduser -> init-device-perms
       base -> init-envfile
       init-os-end -> init-folders
       init-php -> init-keygen
@@ -339,6 +340,7 @@ To help with development, we generate this dependency graph.
       init-samples -> init-nginx
       init-version-checks -> init-nginx-end
       init-adduser -> init-os-end
+      init-device-perms -> init-os-end
       init-envfile -> init-os-end
       init-keygen -> init-permissions
       init-nginx -> init-php
