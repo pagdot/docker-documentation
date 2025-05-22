@@ -399,6 +399,7 @@ To help with development, we generate this dependency graph.
       init-crontab-config -> init-config-end
       init-config -> init-crontab-config
       init-mods-end -> init-custom-files
+      init-adduser -> init-device-perms
       base -> init-envfile
       init-os-end -> init-kasmvnc
       init-nginx -> init-kasmvnc-config
@@ -409,6 +410,7 @@ To help with development, we generate this dependency graph.
       init-mods -> init-mods-package-install
       init-kasmvnc -> init-nginx
       init-adduser -> init-os-end
+      init-device-perms -> init-os-end
       init-envfile -> init-os-end
       init-custom-files -> init-services
       init-kasmvnc-config -> init-video
