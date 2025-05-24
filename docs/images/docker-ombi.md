@@ -325,6 +325,7 @@ To help with development, we generate this dependency graph.
       init-ombi-config -> init-config-end
       init-config -> init-crontab-config
       init-mods-end -> init-custom-files
+      init-adduser -> init-device-perms
       base -> init-envfile
       base -> init-migrations
       init-config-end -> init-mods
@@ -332,6 +333,7 @@ To help with development, we generate this dependency graph.
       init-mods -> init-mods-package-install
       init-config -> init-ombi-config
       init-adduser -> init-os-end
+      init-device-perms -> init-os-end
       init-envfile -> init-os-end
       init-custom-files -> init-services
       init-services -> svc-cron
