@@ -401,6 +401,7 @@ To help with development, we generate this dependency graph.
 
 ## Versions
 
+* **14.05.25:** - Existing users should verify: site-confs/default.conf and config/local.php - Clean-up default site conf and local.php.
 * **16.12.24:** - Rebase to Alpine 3.21.
 * **24.09.24:** - Existing users should verify: site-confs/default.conf - Update rewriting rules default site conf.
 * **14.09.24:** - Ensure user config files have the right permissions.
