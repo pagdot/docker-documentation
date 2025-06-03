@@ -107,6 +107,7 @@ services:
       - SUDO_PASSWORD_HASH= #optional
       - PROXY_DOMAIN=code-server.my.domain #optional
       - DEFAULT_WORKSPACE=/config/workspace #optional
+      - PWA_APPNAME=code-server #optional
     volumes:
       - /path/to/code-server/config:/config
     ports:
@@ -128,6 +129,7 @@ docker run -d \
   -e SUDO_PASSWORD_HASH= `#optional` \
   -e PROXY_DOMAIN=code-server.my.domain `#optional` \
   -e DEFAULT_WORKSPACE=/config/workspace `#optional` \
+  -e PWA_APPNAME=code-server `#optional` \
   -p 8443:8443 \
   -v /path/to/code-server/config:/config \
   --restart unless-stopped \
@@ -157,6 +159,7 @@ Containers are configured using parameters passed at runtime (such as those abov
 | `SUDO_PASSWORD_HASH=` | Optionally set sudo password via hash (takes priority over `SUDO_PASSWORD` var). Format is `$type$salt$hashed`. |
 | `PROXY_DOMAIN=code-server.my.domain` | If this optional variable is set, this domain will be proxied for subdomain proxying. See [Documentation](https://github.com/coder/code-server/blob/main/docs/guide.md#using-a-subdomain) |
 | `DEFAULT_WORKSPACE=/config/workspace` | If this optional variable is set, code-server will open this directory by default |
+| `PWA_APPNAME=code-server` | If this optional variable is set, the PWA app will the specified name. |
 
 ### Volume Mappings (`-v`)
 
@@ -380,6 +383,7 @@ To help with development, we generate this dependency graph.
 
 ## Versions
 
+* **03.06.25:** - Allow setting PWA name using env var `PWA_APPNAME`.
 * **13.10.24:** - Only chown config folder when change to ownership or new install is detected.
 * **09.10.24:** - Manage permissions in /config/.ssh according to file type
 * **19.08.24:** - Rebase to Ubuntu Noble.
