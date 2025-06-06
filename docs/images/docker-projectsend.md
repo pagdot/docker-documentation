@@ -41,6 +41,8 @@ The architectures supported by this image are:
 
 Requires a user and database in either mysql or mariadb.
 
+crontab for scheduled tasks should be added to /config/crontabs/abc and the container restarted to enable.
+
 To set PHP options like max upload size please edit /config/php/projectsend.ini
 
 To use translations, follow the instructions [here](https://www.projectsend.org/how-to-use-translation-files/). The necessary paths are symlinked under `/config/translations` (note that the "templates" paths don't need `lang` subdirectories).
@@ -340,6 +342,7 @@ To help with development, we generate this dependency graph.
 
 ## Versions
 
+* **06.06.25:** - Add crontab handler for scheduled tasks.
 * **21.12.24:** - Rebase to Alpine 3.21, move php .ini file to /config/php.
 * **06.06.24:** - Rebase to Alpine 3.20.
 * **23.12.23:** - Rebase to Alpine 3.19 with php 8.3.
