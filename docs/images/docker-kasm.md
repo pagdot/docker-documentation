@@ -116,8 +116,8 @@ services:
       - DOCKER_HUB_PASSWORD=PASS #optional
       - DOCKER_MTU=1500 #optional
     volumes:
-      - /path/to/data:/opt
-      - /path/to/profiles:/profiles #optional
+      - /path/to/kasm/data:/opt
+      - /path/to/kasm/profiles:/profiles #optional
       - /dev/input:/dev/input #optional
       - /run/udev/data:/run/udev/data #optional
     ports:
@@ -139,8 +139,8 @@ docker run -d \
   -e DOCKER_MTU=1500 `#optional` \
   -p 3000:3000 \
   -p 443:443 \
-  -v /path/to/data:/opt \
-  -v /path/to/profiles:/profiles `#optional` \
+  -v /path/to/kasm/data:/opt \
+  -v /path/to/kasm/profiles:/profiles `#optional` \
   -v /dev/input:/dev/input `#optional` \
   -v /run/udev/data:/run/udev/data `#optional` \
   --restart unless-stopped \
@@ -346,24 +346,20 @@ To help with development, we generate this dependency graph.
       init-os-end -> init-config
       init-config -> init-config-end
       init-config-kasm -> init-config-end
+      init-crontab-config -> init-config-end
       init-config -> init-config-kasm
-      init-os-end -> init-crontab-config
+      init-config -> init-crontab-config
       init-mods-end -> init-custom-files
       init-adduser -> init-device-perms
       base -> init-envfile
       base -> init-migrations
-      base -> init-mods
       init-config-end -> init-mods
-      init-mods -> init-mods-end
       init-mods-package-install -> init-mods-end
       init-mods -> init-mods-package-install
-      base -> init-os-end
       init-adduser -> init-os-end
       init-device-perms -> init-os-end
       init-envfile -> init-os-end
-      init-migrations -> init-os-end
       init-custom-files -> init-services
-      init-mods-end -> init-services
       init-services -> svc-cron
       svc-cron -> legacy-services
       init-config-kasm -> svc-docker
@@ -374,13 +370,14 @@ To help with development, we generate this dependency graph.
       svc-kasm-wizard -> legacy-services
     }
     Base Images: {
-      "baseimage-ubuntu:jammy"
+      "baseimage-ubuntu:noble"
     }
     "kasm:latest" <- Base Images
     ```
 
 ## Versions
 
+* **03.06.25:** - Rebase to Ubuntu Noble. Update for 1.17.0 release.
 * **09.11.24:** - Update base image for 1.16.1 release.
 * **24.09.24:** - Add base users in docker build logic to survive container upgrades.
 * **17.09.24:** - Update base image for 1.16.0 release and fix Nvidia support.
