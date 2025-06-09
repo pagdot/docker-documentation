@@ -42,15 +42,6 @@ The architectures supported by this image are:
 | arm64 | ✅ | arm64v8-\<version tag\> |
 | armhf | ❌ | |
 
-## Version Tags
-
-This image provides various versions that are available via tags. Please read the descriptions carefully and exercise caution when using unstable or development tags.
-
-| Tag | Available | Description |
-| :----: | :----: |--- |
-| latest | ✅ | Stable Kasm releases |
-| develop | ✅ | Tip of develop |
-
 ## Application Setup
 
 This container uses [Docker in Docker](https://www.docker.com/blog/docker-can-now-run-within-docker/) and requires being run in `privileged` mode. This container also requires an initial setup that runs on port 3000.
@@ -377,6 +368,7 @@ To help with development, we generate this dependency graph.
 
 ## Versions
 
+* **08.06.25:** - Deprecate develop branch.
 * **03.06.25:** - Rebase to Ubuntu Noble. Update for 1.17.0 release.
 * **09.11.24:** - Update base image for 1.16.1 release.
 * **24.09.24:** - Add base users in docker build logic to survive container upgrades.
