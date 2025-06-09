@@ -311,38 +311,35 @@ To help with development, we generate this dependency graph.
       init-migrations -> init-adduser
       init-os-end -> init-config
       init-config -> init-config-end
+      init-crontab-config -> init-config-end
       init-pyload-config -> init-config-end
-      init-os-end -> init-crontab-config
+      init-config -> init-crontab-config
       init-mods-end -> init-custom-files
       init-adduser -> init-device-perms
       base -> init-envfile
       base -> init-migrations
-      base -> init-mods
       init-config-end -> init-mods
-      init-mods -> init-mods-end
       init-mods-package-install -> init-mods-end
       init-mods -> init-mods-package-install
-      base -> init-os-end
       init-adduser -> init-os-end
       init-device-perms -> init-os-end
       init-envfile -> init-os-end
-      init-migrations -> init-os-end
       init-config -> init-pyload-config
       init-custom-files -> init-services
-      init-mods-end -> init-services
       init-services -> svc-cron
       svc-cron -> legacy-services
       init-services -> svc-pyload
       svc-pyload -> legacy-services
     }
     Base Images: {
-      "baseimage-alpine:3.19"
+      "baseimage-alpine:3.22"
     }
     "pyload-ng:latest" <- Base Images
     ```
 
 ## Versions
 
+* **09.06.25:** - Rebase to Alpine 3.22.
 * **20.07.24:** - Revert to Alpine 3.19 due to inconsistent upstream addon support for Python 3.12.
 * **27.06.24:** - Rebase to Alpine 3.20.
 * **23.12.23:** - Rebase to Alpine 3.19.
