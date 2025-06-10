@@ -346,6 +346,7 @@ To help with development, we generate this dependency graph.
 
 ## Versions
 
+* **10.06.25:** - Remove dvb-apps as upstream repo no longer exists.
 * **21.05.25:** - Rebase to Ubuntu Noble as the new upstream version requires glibc.
 * **30.06.24:** - Rebase to Alpine 3.20.
 * **08.12.23:** - Rebase to Alpine 3.19, switch to building from releases rather than commits.
