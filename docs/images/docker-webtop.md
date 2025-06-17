@@ -48,7 +48,6 @@ This image provides various versions that are available via tags. Please read th
 | fedora-xfce | ✅ | XFCE Fedora |
 | arch-xfce | ✅ | XFCE Arch |
 | debian-xfce | ✅ | XFCE Debian |
-| alpine-kde | ✅ | KDE Alpine |
 | ubuntu-kde | ✅ | KDE Ubuntu |
 | fedora-kde | ✅ | KDE Fedora |
 | arch-kde | ✅ | KDE Arch |
@@ -63,37 +62,25 @@ This image provides various versions that are available via tags. Please read th
 | fedora-i3 | ✅ | i3 Fedora |
 | arch-i3 | ✅ | i3 Arch |
 | debian-i3 | ✅ | i3 Debian |
-| alpine-openbox | ✅ | Openbox Alpine |
-| ubuntu-openbox | ✅ | Openbox Ubuntu |
-| fedora-openbox | ✅ | Openbox Fedora |
-| arch-openbox | ✅ | Openbox Arch |
-| debian-openbox | ✅ | Openbox Debian |
-| alpine-icewm | ✅ | IceWM Alpine |
-| ubuntu-icewm | ✅ | IceWM Ubuntu |
-| fedora-icewm | ✅ | IceWM Fedora |
-| arch-icewm | ✅ | IceWM Arch |
-| debian-icewm | ✅ | IceWM Debian |
 
 ## Application Setup
 
 The Webtop can be accessed at:
 
-* http://yourhost:3000/
 * https://yourhost:3001/
 
 **Modern GUI desktop apps have issues with the latest Docker and syscall compatibility, you can use Docker with the `--security-opt seccomp=unconfined` setting to allow these syscalls on hosts with older Kernels or libseccomp**
 
 ### Security
 
-!!! warning
-
-    Do not put this on the Internet if you do not know what you are doing.
+>[!WARNING]
+>Do not put this on the Internet if you do not know what you are doing.
 
 By default this container has no authentication and the optional environment variables `CUSTOM_USER` and `PASSWORD` to enable basic http auth via the embedded NGINX server should only be used to locally secure the container from unwanted access on a local network. If exposing this to the Internet we recommend putting it behind a reverse proxy, such as [SWAG](https://github.com/linuxserver/docker-swag), and ensuring a secure authentication solution is in place. From the web interface a terminal can be launched and it is configured for passwordless sudo, so anyone with access to it can install and run whatever they want along with probing your local network.
 
-### Options in all KasmVNC based GUI containers
+### Options in all Selkies based GUI containers
 
-This container is based on [Docker Baseimage KasmVNC](https://github.com/linuxserver/docker-baseimage-kasmvnc) which means there are additional environment variables and run configurations to enable or disable specific functionality.
+This container is based on [Docker Baseimage Selkies](https://github.com/linuxserver/docker-baseimage-selkies) which means there are additional environment variables and run configurations to enable or disable specific functionality.
 
 #### Optional environment variables
 
@@ -104,14 +91,12 @@ This container is based on [Docker Baseimage KasmVNC](https://github.com/linuxse
 | CUSTOM_USER | HTTP Basic auth username, abc is default. |
 | PASSWORD | HTTP Basic auth password, abc is default. If unset there will be no auth |
 | SUBFOLDER | Subfolder for the application if running a subfolder reverse proxy, need both slashes IE `/subfolder/` |
-| TITLE | The page title displayed on the web browser, default "KasmVNC Client". |
-| FM_HOME | This is the home directory (landing) for the file manager, default "/config". |
+| TITLE | The page title displayed on the web browser, default "Selkies". |
 | START_DOCKER | If set to false a container with privilege will not automatically start the DinD Docker setup. |
-| DRINODE | If mounting in /dev/dri for [DRI3 GPU Acceleration](https://www.kasmweb.com/kasmvnc/docs/master/gpu_acceleration.html) allows you to specify the device to use IE `/dev/dri/renderD128` |
 | DISABLE_IPV6 | If set to true or any value this will disable IPv6 | 
 | LC_ALL | Set the Language for the container to run as IE `fr_FR.UTF-8` `ar_AE.UTF-8` |
 | NO_DECOR | If set the application will run without window borders in openbox for use as a PWA. |
-| NO_FULL | Do not autmatically fullscreen applications when using openbox. |
+| NO_FULL | Do not automatically fullscreen applications when using openbox. |
 
 #### Optional run configurations
 
@@ -119,40 +104,23 @@ This container is based on [Docker Baseimage KasmVNC](https://github.com/linuxse
 | :----: | --- |
 | `--privileged` | Will start a Docker in Docker (DinD) setup inside the container to use docker in an isolated environment. For increased performance mount the Docker directory inside the container to the host IE `-v /home/user/docker-data:/var/lib/docker`. |
 | `-v /var/run/docker.sock:/var/run/docker.sock` | Mount in the host level Docker socket to either interact with it via CLI or use Docker enabled applications. |
-| `--device /dev/dri:/dev/dri` | Mount a GPU into the container, this can be used in conjunction with the `DRINODE` environment variable to leverage a host video card for GPU accelerated applications. Only **Open Source** drivers are supported IE (Intel,AMDGPU,Radeon,ATI,Nouveau) |
 
 ### Language Support - Internationalization
 
-The environment variable `LC_ALL` can be used to start this container in a different language than English simply pass for example to launch the Desktop session in French `LC_ALL=fr_FR.UTF-8`. Some languages like Chinese, Japanese, or Korean will be missing fonts needed to render properly known as cjk fonts, but others may exist and not be installed inside the container depending on what underlying distribution you are running. We only ensure fonts for Latin characters are present. Fonts can be installed with a mod on startup.
+The environment variable `LC_ALL` can be used to start this container in a different language than English simply pass for example to launch the Desktop session in French `LC_ALL=fr_FR.UTF-8`. Some supported languages: 
 
-To install cjk fonts on startup as an example pass the environment variables (Alpine base):
+* `-e LC_ALL=zh_CN.UTF-8` - Chinese
+* `-e LC_ALL=ja_JP.UTF-8` - Japanese
+* `-e LC_ALL=ko_KR.UTF-8` - Korean
+* `-e LC_ALL=ar_AE.UTF-8` - Arabic
+* `-e LC_ALL=ru_RU.UTF-8` - Russian
+* `-e LC_ALL=es_MX.UTF-8` - Spanish (Latin America)
+* `-e LC_ALL=de_DE.UTF-8` - German
+* `-e LC_ALL=fr_FR.UTF-8` - French
+* `-e LC_ALL=nl_NL.UTF-8` - Netherlands
+* `-e LC_ALL=it_IT.UTF-8` - Italian
 
-```
--e DOCKER_MODS=linuxserver/mods:universal-package-install 
--e INSTALL_PACKAGES=font-noto-cjk
--e LC_ALL=zh_CN.UTF-8
-```
-
-The web interface has the option for "IME Input Mode" in Settings which will allow non english characters to be used from a non en_US keyboard on the client. Once enabled it will perform the same as a local Linux installation set to your locale.
-
-### DRI3 GPU Acceleration (KasmVNC interface)
-
-For accelerated apps or games, render devices can be mounted into the container and leveraged by applications using:
-
-`--device /dev/dri:/dev/dri`
-
-This feature only supports **Open Source** GPU drivers:
-
-| Driver | Description |
-| :----: | --- |
-| Intel | i965 and i915 drivers for Intel iGPU chipsets |
-| AMD | AMDGPU, Radeon, and ATI drivers for AMD dedicated or APU chipsets |
-| NVIDIA | nouveau2 drivers only, closed source NVIDIA drivers lack DRI3 support |
-
-The `DRINODE` environment variable can be used to point to a specific GPU.
-Up to date information can be found [here](https://www.kasmweb.com/kasmvnc/docs/master/gpu_acceleration.html)
-
-### Nvidia GPU Support (KasmVNC interface)
+### Nvidia GPU Support
 
 **Nvidia support is not compatible with Alpine based images as Alpine lacks Nvidia drivers**
 
@@ -175,7 +143,7 @@ And to assign the GPU in compose:
 ```
 services:
   webtop:
-    image: lscr.io/linuxserver/webtop:latest
+    image: lscr.io/linuxserver/webtop:ubuntu-xfce
     deploy:
       resources:
         reservations:
@@ -189,13 +157,13 @@ services:
 
 #### PRoot Apps
 
-If you run system native installations of software IE `sudo apt-get install filezilla` and then upgrade or destroy/re-create the container that software will be removed and the container will be at a clean state. For some users that will be acceptable and they can update their system packages as well using system native commands like `apt-get upgrade`. If you want Docker to handle upgrading the container and retain your applications and settings we have created [proot-apps](https://github.com/linuxserver/proot-apps) which allow portable applications to be installed to persistent storage in the user's `$HOME` directory and they will work in a confined Docker environment out of the box. These applications and their settings will persist upgrades of the base container and can be mounted into different flavors of KasmVNC based containers on the fly. This can be achieved from the command line with:
+If you run system native installations of software IE `sudo apt-get install filezilla` and then upgrade or destroy/re-create the container that software will be removed and the container will be at a clean state. For some users that will be acceptable and they can update their system packages as well using system native commands like `apt-get upgrade`. If you want Docker to handle upgrading the container and retain your applications and settings we have created [proot-apps](https://github.com/linuxserver/proot-apps) which allow portable applications to be installed to persistent storage in the user's `$HOME` directory and they will work in a confined Docker environment out of the box. These applications and their settings will persist upgrades of the base container and can be mounted into different flavors ofSelkiess based containers on the fly. This can be achieved from the command line with:
 
 ```
 proot-apps install filezilla
 ```
 
-PRoot Apps is included in all KasmVNC based containers, a list of linuxserver.io supported applications is located [HERE](https://github.com/linuxserver/proot-apps?tab=readme-ov-file#supported-apps).
+PRoot Apps is included in all Selkies based containers, a list of linuxserver.io supported applications is located [HERE](https://github.com/linuxserver/proot-apps?tab=readme-ov-file#supported-apps).
 
 #### Native Apps
 
@@ -206,6 +174,11 @@ It is possible to install extra packages during container start using [universal
     - DOCKER_MODS=linuxserver/mods:universal-package-install
     - INSTALL_PACKAGES=libfuse2|git|gdb
 ```
+
+### Strict reverse proxies
+
+This image uses a self-signed certificate by default. This naturally means the scheme is `https`.
+If you are using a reverse proxy which validates certificates, you need to [disable this check for the container](https://docs.linuxserver.io/faq#strict-proxy).
 
 ## Usage
 
@@ -237,8 +210,6 @@ services:
     ports:
       - 3000:3000
       - 3001:3001
-    devices:
-      - /dev/dri:/dev/dri #optional
     shm_size: "1gb" #optional
     restart: unless-stopped
 ```
@@ -258,7 +229,6 @@ docker run -d \
   -p 3001:3001 \
   -v /path/to/data:/config \
   -v /var/run/docker.sock:/var/run/docker.sock `#optional` \
-  --device /dev/dri:/dev/dri `#optional` \
   --shm-size="1gb" `#optional` \
   --restart unless-stopped \
   lscr.io/linuxserver/webtop:latest
@@ -272,7 +242,7 @@ Containers are configured using parameters passed at runtime (such as those abov
 
 | Parameter | Function |
 | :----: | --- |
-| `3000:3000` | Web Desktop GUI |
+| `3000:3000` | Web Desktop GUI HTTP, must be proxied |
 | `3001:3001` | Web Desktop GUI HTTPS |
 
 ### Environment Variables (`-e`)
@@ -291,12 +261,6 @@ Containers are configured using parameters passed at runtime (such as those abov
 | :----: | --- |
 | `/config` | abc users home directory |
 | `/var/run/docker.sock` | Docker Socket on the system, if you want to use Docker in the container |
-
-### Device Mappings (`--device`)
-
-| Parameter | Function |
-| :-----:   | --- |
-| `/dev/dri` | Add this for GL support (Linux hosts only) |
 
 #### Miscellaneous Options
 
@@ -484,55 +448,59 @@ To help with development, we generate this dependency graph.
       custom services -> legacy-services
       legacy-services -> ci-service-check
       init-migrations -> init-adduser
-      init-kasmvnc-end -> init-config
       init-os-end -> init-config
+      init-selkies-end -> init-config
       init-config -> init-config-end
       init-crontab-config -> init-config-end
       init-config -> init-crontab-config
       init-mods-end -> init-custom-files
+      init-config-end -> init-deprecate
       init-adduser -> init-device-perms
       base -> init-envfile
-      init-os-end -> init-kasmvnc
-      init-nginx -> init-kasmvnc-config
-      init-video -> init-kasmvnc-end
       base -> init-migrations
       init-config-end -> init-mods
       init-mods-package-install -> init-mods-end
       init-mods -> init-mods-package-install
-      init-kasmvnc -> init-nginx
+      init-selkies -> init-nginx
       init-adduser -> init-os-end
       init-device-perms -> init-os-end
       init-envfile -> init-os-end
+      init-os-end -> init-selkies
+      init-nginx -> init-selkies-config
+      init-video -> init-selkies-end
       init-custom-files -> init-services
-      init-kasmvnc-config -> init-video
+      init-deprecate -> init-services
+      init-selkies-config -> init-video
       init-services -> svc-cron
       svc-cron -> legacy-services
       init-services -> svc-de
       svc-nginx -> svc-de
+      svc-xorg -> svc-de
       svc-de -> legacy-services
       init-services -> svc-docker
       svc-de -> svc-docker
       svc-docker -> legacy-services
-      init-services -> svc-kasmvnc
-      svc-pulseaudio -> svc-kasmvnc
-      svc-kasmvnc -> legacy-services
-      init-services -> svc-kclient
-      svc-kasmvnc -> svc-kclient
-      svc-kclient -> legacy-services
       init-services -> svc-nginx
-      svc-kclient -> svc-nginx
       svc-nginx -> legacy-services
       init-services -> svc-pulseaudio
       svc-pulseaudio -> legacy-services
+      init-services -> svc-selkies
+      svc-nginx -> svc-selkies
+      svc-pulseaudio -> svc-selkies
+      svc-xorg -> svc-selkies
+      svc-selkies -> legacy-services
+      init-services -> svc-xorg
+      svc-xorg -> legacy-services
     }
     Base Images: {
-      "baseimage-kasmvnc:alpine321" <- "baseimage-alpine:3.21"
+      "baseimage-selkies:alpine322" <- "baseimage-alpine:3.22"
     }
     "webtop:latest" <- Base Images
     ```
 
 ## Versions
 
+* **17.06.25:** - Rebase all images to Selkies, drop openbox and icewm, bump Alpine to 3.22, bump Fedora to 42.
 * **10.01.25:** - Rebase Fedora to 41.
 * **06.12.24:** - Rebase Alpine to 3.21.
 * **26.09.24:** - Swap from firefox to chromium on Alpine images.
