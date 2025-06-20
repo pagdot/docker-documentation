@@ -70,6 +70,8 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Etc/UTC
+      - NGINX_AUTORELOAD= #optional
+      - NGINX_AUTORELOAD_WATCHLIST= #optional
     volumes:
       - /path/to/nginx/config:/config
     ports:
@@ -86,6 +88,8 @@ docker run -d \
   -e PUID=1000 \
   -e PGID=1000 \
   -e TZ=Etc/UTC \
+  -e NGINX_AUTORELOAD= `#optional` \
+  -e NGINX_AUTORELOAD_WATCHLIST= `#optional` \
   -p 80:80 \
   -p 443:443 \
   -v /path/to/nginx/config:/config \
@@ -111,6 +115,8 @@ Containers are configured using parameters passed at runtime (such as those abov
 | `PUID=1000` | for UserID - see below for explanation |
 | `PGID=1000` | for GroupID - see below for explanation |
 | `TZ=Etc/UTC` | specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List). |
+| `NGINX_AUTORELOAD=` | Set to `true` to enable automatic reloading of confs on change without stopping/restarting nginx. Your filesystem must support inotify. This functionality was previously offered [via mod](https://github.com/linuxserver/docker-mods/tree/swag-auto-reload). |
+| `NGINX_AUTORELOAD_WATCHLIST=` | A [pipe](https://en.wikipedia.org/wiki/Vertical_bar)-separated list of additional folders for auto reload to watch in addition to `/config/nginx` |
 
 ### Volume Mappings (`-v`)
 
@@ -331,17 +337,20 @@ To help with development, we generate this dependency graph.
       svc-cron -> legacy-services
       init-services -> svc-nginx
       svc-nginx -> legacy-services
+      init-services -> svc-nginx-auto-reload
+      svc-nginx-auto-reload -> legacy-services
       init-services -> svc-php-fpm
       svc-php-fpm -> legacy-services
     }
     Base Images: {
-      "baseimage-alpine-nginx:3.21" <- "baseimage-alpine:3.21"
+      "baseimage-alpine-nginx:3.22" <- "baseimage-alpine:3.22"
     }
     "nginx:latest" <- Base Images
     ```
 
 ## Versions
 
+* **16.06.25:** - Rebase to Alpine 3.22 with PHP 8.4. Add [Auto Reload](https://github.com/linuxserver/docker-mods/tree/swag-auto-reload) functionality. Drop PHP bindings for mcrypt as it is no longer maintained.
 * **17.12.24:** - Rebase to Alpine 3.21.
 * **31.05.24:** - Rebase to Alpine 3.20. Existing users should update their nginx confs to avoid http2 deprecation warnings.
 * **05.03.24:** - Rebase to Alpine 3.19 with php 8.3.
