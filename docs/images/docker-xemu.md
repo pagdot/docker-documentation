@@ -71,8 +71,8 @@ And to assign the GPU in compose:
 
 ```
 services:
-  webtop:
-    image: lscr.io/linuxserver/suyu:latest
+  xemu:
+    image: lscr.io/linuxserver/xemu:latest
     deploy:
       resources:
         reservations:
