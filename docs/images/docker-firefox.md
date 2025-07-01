@@ -37,6 +37,15 @@ The architectures supported by this image are:
 | arm64 | ✅ | arm64v8-\<version tag\> |
 | armhf | ❌ | |
 
+## Version Tags
+
+This image provides various versions that are available via tags. Please read the descriptions carefully and exercise caution when using unstable or development tags.
+
+| Tag | Available | Description |
+| :----: | :----: |--- |
+| latest | ✅ | Latest releases using the selkies base |
+| kasm | ✅ | Latest releases using the kasmvnc base |
+
 ## Application Setup
 
 The application can be accessed at:
@@ -113,7 +122,7 @@ services:
       - TZ=Etc/UTC
       - FIREFOX_CLI=https://www.linuxserver.io/ #optional
     volumes:
-      - /path/to/config:/config
+      - /path/to/firefox/config:/config
     ports:
       - 3000:3000
       - 3001:3001
@@ -133,7 +142,7 @@ docker run -d \
   -e FIREFOX_CLI=https://www.linuxserver.io/ `#optional` \
   -p 3000:3000 \
   -p 3001:3001 \
-  -v /path/to/config:/config \
+  -v /path/to/firefox/config:/config \
   --shm-size="1gb" \
   --restart unless-stopped \
   lscr.io/linuxserver/firefox:latest
@@ -402,6 +411,7 @@ To help with development, we generate this dependency graph.
 
 ## Versions
 
+* **01.07.25:** - Add Kasm branch.
 * **23.06.25:** - Rebase to Selkies.
 * **25.09.24:** - Rebase to Ubuntu Noble.
 * **23.05.24:** - Rebase to Alpine 3.20.
