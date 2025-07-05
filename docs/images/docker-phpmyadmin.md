@@ -352,13 +352,14 @@ To help with development, we generate this dependency graph.
       svc-php-fpm -> legacy-services
     }
     Base Images: {
-      "baseimage-alpine-nginx:3.21" <- "baseimage-alpine:3.21"
+      "baseimage-alpine-nginx:3.22" <- "baseimage-alpine:3.22"
     }
     "phpmyadmin:latest" <- Base Images
     ```
 
 ## Versions
 
+* **05.07.25:** - Rebase to Alpine 3.22.
 * **19.12.24:** - Rebase to Alpine 3.21.
 * **27.05.24:** - Existing users should update their nginx confs to avoid http2 deprecation warnings.
 * **24.05.24:** - Rebase to Alpine 3.20.
