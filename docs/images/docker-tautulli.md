@@ -332,13 +332,14 @@ To help with development, we generate this dependency graph.
       svc-tautulli -> legacy-services
     }
     Base Images: {
-      "baseimage-alpine:3.21"
+      "baseimage-alpine:3.22"
     }
     "tautulli:latest" <- Base Images
     ```
 
 ## Versions
 
+* **05.07.25:** - Rebase to Alpine 3.22.
 * **03.01.25:** - Rebase to Alpine 3.21.
 * **19.11.24:** - Use upstream python packages.
 * **24.06.24:** - Rebase to Alpine 3.20.
