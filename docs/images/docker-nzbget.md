@@ -360,12 +360,14 @@ To help with development, we generate this dependency graph.
       svc-nzbget -> legacy-services
     }
     Base Images: {
-      "baseimage-alpine:3.21"
+      "baseimage-alpine:3.22"
     }
     "nzbget:latest" <- Base Images
     ```
 
 ## Versions
 
+* **05.07.25:** - Rebase to Alpine 3.22.
+* **24.12.24:** - Rebase to Alpine 3.21. Move MainDir to /config, leave default DestDir/InterDir as /downloads.
 * **31.05.24:** - Rebase to Alpine 3.20.
 * **09.05.24:** - Revive image based on the fork from https://github.com/nzbgetcom/nzbget.
