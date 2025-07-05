@@ -346,14 +346,15 @@ To help with development, we generate this dependency graph.
       svc-pairdrop -> legacy-services
     }
     Base Images: {
-      "baseimage-alpine:3.21"
+      "baseimage-alpine:3.22"
     }
     "pairdrop:latest" <- Base Images
     ```
 
 ## Versions
 
-* **21.12.24:** - Rebase to Alpine 3.20.
+* **05.07.25:** - Rebase to Alpine 3.22.
+* **21.12.24:** - Rebase to Alpine 3.21.
 * **31.05.24:** - Rebase to Alpine 3.20.
 * **31.01.24:** - Rebase to Alpine 3.19.
 * **30.05.23:** - Rebase to Alpine 3.18.
