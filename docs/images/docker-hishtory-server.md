@@ -325,13 +325,14 @@ To help with development, we generate this dependency graph.
       svc-hishtory -> legacy-services
     }
     Base Images: {
-      "baseimage-alpine:3.21"
+      "baseimage-alpine:3.22"
     }
     "hishtory-server:latest" <- Base Images
     ```
 
 ## Versions
 
+* **05.07.25:** - Rebase to Alpine 3.22.
 * **19.12.24:** - Rebase to Alpine 3.21.
 * **26.08.24:** - Bump to go 1.23
 * **24.05.24:** - Rebase to Alpine 3.20.
