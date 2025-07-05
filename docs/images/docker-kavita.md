@@ -324,6 +324,7 @@ To help with development, we generate this dependency graph.
 
 ## Versions
 
+* **05.07.25:** - Update init for version 0.8.7 compatibility.
 * **10.07.24:** - Rebase to Ubuntu Noble.
 * **12.08.23:** - Fix app file perms to prevent high uid.
 * **07.08.23:** - Initial Release.
