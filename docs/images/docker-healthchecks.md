@@ -35,7 +35,6 @@ The architectures supported by this image are:
 | :----: | :----: | ---- |
 | x86-64 | ✅ | amd64-\<version tag\> |
 | arm64 | ✅ | arm64v8-\<version tag\> |
-| armhf | ❌ | |
 
 ## Application Setup
 
@@ -375,13 +374,14 @@ To help with development, we generate this dependency graph.
       svc-healthchecks -> legacy-services
     }
     Base Images: {
-      "baseimage-alpine:3.21"
+      "baseimage-alpine:3.22"
     }
     "healthchecks:latest" <- Base Images
     ```
 
 ## Versions
 
+* **05.07.25:** - Rebase to Alpine 3.22.
 * **20.12.24:** - Rebase to Alpine 3.21.
 * **31.08.24:** - Enable IPv6 on uwsgi.
 * **31.05.24:** - Rebase to Alpine 3.20.
