@@ -36,7 +36,6 @@ The architectures supported by this image are:
 | :----: | :----: | ---- |
 | x86-64 | ✅ | amd64-\<version tag\> |
 | arm64 | ✅ | arm64v8-\<version tag\> |
-| armhf | ❌ | |
 
 ## Application Setup
 
@@ -334,13 +333,14 @@ To help with development, we generate this dependency graph.
       svc-cron -> legacy-services
     }
     Base Images: {
-      "baseimage-alpine:3.21"
+      "baseimage-alpine:3.22"
     }
     "changedetection.io:latest" <- Base Images
     ```
 
 ## Versions
 
+* **05.07.25:** - Rebase to Alpine 3.22.
 * **19.12.24:** - Rebase to Alpine 3.21.
 * **31.05.24:** - Rebase to Alpine 3.20.
 * **09.03.24:** - Build Playwright from source because Microsoft's build and packaging process is awful.
