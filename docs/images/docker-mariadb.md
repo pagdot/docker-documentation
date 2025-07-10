@@ -405,13 +405,14 @@ To help with development, we generate this dependency graph.
       svc-mariadb -> legacy-services
     }
     Base Images: {
-      "baseimage-alpine:3.21"
+      "baseimage-alpine:3.22"
     }
     "mariadb:latest" <- Base Images
     ```
 
 ## Versions
 
+* **09.07.25:** - Rebase to Alpine 3.22.
 * **11.01.25:** - Add log rotation, follow the instructions in the container log.
 * **06.01.25:** - Rebase to Alpine 3.21.
 * **31.05.24:** - Rebase to Alpine 3.20.
