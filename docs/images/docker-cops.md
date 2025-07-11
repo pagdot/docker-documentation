@@ -393,13 +393,14 @@ To help with development, we generate this dependency graph.
       svc-php-fpm -> legacy-services
     }
     Base Images: {
-      "baseimage-alpine-nginx:3.21" <- "baseimage-alpine:3.21"
+      "baseimage-alpine-nginx:3.22" <- "baseimage-alpine:3.22"
     }
     "cops:latest" <- Base Images
     ```
 
 ## Versions
 
+* **10.07.25:** - Rebase to Alpine 3.22.
 * **14.05.25:** - Existing users should verify: site-confs/default.conf and config/local.php - Clean-up default site conf and local.php.
 * **16.12.24:** - Rebase to Alpine 3.21.
 * **24.09.24:** - Existing users should verify: site-confs/default.conf - Update rewriting rules default site conf.
