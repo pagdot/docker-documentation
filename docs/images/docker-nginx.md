@@ -349,6 +349,7 @@ To help with development, we generate this dependency graph.
 
 ## Versions
 
+* **13.07.25:** - Fixed auto-reload functionality.
 * **16.06.25:** - Rebase to Alpine 3.22 with PHP 8.4. Add [Auto Reload](https://github.com/linuxserver/docker-mods/tree/swag-auto-reload) functionality. Drop PHP bindings for mcrypt as it is no longer maintained.
 * **17.12.24:** - Rebase to Alpine 3.21.
 * **31.05.24:** - Rebase to Alpine 3.20. Existing users should update their nginx confs to avoid http2 deprecation warnings.
