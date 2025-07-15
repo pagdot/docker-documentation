@@ -326,11 +326,12 @@ To help with development, we generate this dependency graph.
       svc-luanti -> legacy-services
     }
     Base Images: {
-      "baseimage-alpine:3.21"
+      "baseimage-alpine:3.22"
     }
     "luanti:latest" <- Base Images
     ```
 
 ## Versions
 
+* **09.07.25:** - Rebase to Alpine 3.22.
 * **30.01.25:** - Initial Release.
