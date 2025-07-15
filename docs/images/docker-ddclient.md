@@ -331,13 +331,14 @@ To help with development, we generate this dependency graph.
       svc-inotify -> legacy-services
     }
     Base Images: {
-      "baseimage-alpine:3.21"
+      "baseimage-alpine:3.22"
     }
     "ddclient:latest" <- Base Images
     ```
 
 ## Versions
 
+* **10.07.25:** - Rebase to Alpine 3.22.
 * **08.07.24:** - Fix cache issue.
 * **08.07.24:** - Don't copy config from `/config/ddclient.conf` to `/ddclient.conf` at runtime.
 * **27.06.24:** - Rebase to Alpine 3.20.
