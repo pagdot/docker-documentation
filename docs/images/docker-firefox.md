@@ -255,7 +255,7 @@ Containers are configured using parameters passed at runtime (such as those abov
 
 | Parameter | Function |
 | :----: | --- |
-| `3000:3000` | Firefox desktop gui. |
+| `3000:3000` | Firefox desktop gui HTTP, must be proxied. |
 | `3001:3001` | Firefox desktop gui HTTPS. |
 
 ### Environment Variables (`-e`)
@@ -511,7 +511,7 @@ To help with development, we generate this dependency graph.
 ## Versions
 
 * **01.07.25:** - Add Kasm branch.
-* **23.06.25:** - Rebase to Selkies.
+* **23.06.25:** - Rebase to Selkies, HTTPS is now required.
 * **25.09.24:** - Rebase to Ubuntu Noble.
 * **23.05.24:** - Rebase to Alpine 3.20.
 * **13.02.24:** - Add ability to pass CLI args to Firefox.
