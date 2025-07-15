@@ -39,7 +39,7 @@ The architectures supported by this image are:
 
 You have to create a Spotify application through their [developer dashboard](https://developer.spotify.com/dashboard/applications) to get your Client ID and secret. Set the Redirect URI to match your APP_URL address with `/api/oauth/spotify/callback` included after the domain (i.e., `http://localhost/api/oauth/spotify/callback`).
 
-The application requires an external [mongodb database](https://hub.docker.com/_/mongo/), supported versions are 5.x, 6.x, and 7.x.
+The application requires an external [mongodb database](https://hub.docker.com/_/mongo/), supported versions are 5+.
 
 This ia an all-in-one container which includes both the server and client components. If you require these to be separate then please use the releases from the [your_spotify repo](https://github.com/Yooooomi/your_spotify).
 
@@ -342,13 +342,14 @@ To help with development, we generate this dependency graph.
       svc-your_spotify -> legacy-services
     }
     Base Images: {
-      "baseimage-alpine-nginx:3.21" <- "baseimage-alpine:3.21"
+      "baseimage-alpine-nginx:3.22" <- "baseimage-alpine:3.22"
     }
     "your_spotify:latest" <- Base Images
     ```
 
 ## Versions
 
+* **09.07.25:** - Rebase to Alpine 3.22.
 * **20.12.24:** - Rebase to Alpine 3.21.
 * **27.05.24:** - Existing users should update their nginx confs to avoid http2 deprecation warnings.
 * **24.05.24:** - Rebase to Alpine 3.20.
