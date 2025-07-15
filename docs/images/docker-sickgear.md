@@ -40,37 +40,20 @@ The architectures supported by this image are:
 | x86-64 | ✅ | amd64-\<version tag\> |
 | arm64 | ✅ | arm64v8-\<version tag\> |
 
+## Version Tags
+
+This image provides various versions that are available via tags. Please read the descriptions carefully and exercise caution when using unstable or development tags.
+
+| Tag | Available | Description |
+| :----: | :----: |--- |
+| latest | ✅ | Stable SickGear releases |
+| develop | ✅ | SickGear develop branch commits |
+
 ## Application Setup
 
 ## Setting up the application
 
 Access the webui at `<your-ip>:8081`, for more information check out [SickGear](https://github.com/sickgear/sickgear).
-
-## Migration
-
-Non linuxserver.io containers are known to have the following configuration differences and may need SickGear or docker changes to migrate an existing setup
-
-* The post processing directory which is volume mounted as `downloads` within this container may be `incoming` in other versions.
-
-* The permissions environmental variables which are defined as `PGID` and `PUID` within this container may have been `APP_UID` and `APP_UID` in other versions.
-
-* The configuration file directory which is volume mounted as `config` within this container may be set as the environmental variable `APP_DATA` in other versions.
-
-* The cache directory which is set in `config.ini` may be configured as a fixed path `cache_dir = /data/cache`.
-Symptoms of this issue include port usage problems and a failure to start the web server log entries.
-Whilst the container is stopped alter this directive to `cache_dir = cache` which will allow SickGear to look for the folder relative to the volume mounted `/config` directory.
-
-It is recommended that a clean install be completed, rather than a migration, however if migration is necessary:
-
-* start a new instance of this image
-
-* compare and align SickGear version numbers between old and new. Ideally they should match but at a minimum the old version should be a lower version number to allow SickGear itself to try and migrate
-
-* stop both containers
-
-* notice the configuration difference and migrate copies of the old settings into the new app
-
-* start the new container and test
 
 ## Usage
 
@@ -329,24 +312,20 @@ To help with development, we generate this dependency graph.
       init-migrations -> init-adduser
       init-os-end -> init-config
       init-config -> init-config-end
+      init-crontab-config -> init-config-end
       init-sickgear-config -> init-config-end
-      init-os-end -> init-crontab-config
+      init-config -> init-crontab-config
       init-mods-end -> init-custom-files
       init-adduser -> init-device-perms
       base -> init-envfile
       base -> init-migrations
-      base -> init-mods
       init-config-end -> init-mods
-      init-mods -> init-mods-end
       init-mods-package-install -> init-mods-end
       init-mods -> init-mods-package-install
-      base -> init-os-end
       init-adduser -> init-os-end
       init-device-perms -> init-os-end
       init-envfile -> init-os-end
-      init-migrations -> init-os-end
       init-custom-files -> init-services
-      init-mods-end -> init-services
       init-config -> init-sickgear-config
       init-services -> svc-cron
       svc-cron -> legacy-services
@@ -354,13 +333,14 @@ To help with development, we generate this dependency graph.
       svc-sickgear -> legacy-services
     }
     Base Images: {
-      "baseimage-alpine:3.20"
+      "baseimage-alpine:3.22"
     }
     "sickgear:latest" <- Base Images
     ```
 
 ## Versions
 
+* **09.07.25:** - Rebase to Alpine 3.22.
 * **25.06.24:** - Rebase to Alpine 3.20.
 * **20.03.24:** - Rebase to Alpine 3.19.
 * **08.10.23:** - Install unrar from [linuxserver repo](https://github.com/linuxserver/docker-unrar).
