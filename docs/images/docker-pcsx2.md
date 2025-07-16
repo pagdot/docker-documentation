@@ -496,4 +496,5 @@ To help with development, we generate this dependency graph.
 
 ## Versions
 
+* **15.07.25:** - Switch to stable release for pcsx2.
 * **26.06.25:** - Initial release.
