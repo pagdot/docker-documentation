@@ -471,7 +471,8 @@ To help with development, we generate this dependency graph.
       init-selkies-config -> init-video
       init-services -> svc-cron
       svc-cron -> legacy-services
-      base -> svc-dbus
+      init-services -> svc-dbus
+      svc-xorg -> svc-dbus
       svc-dbus -> legacy-services
       init-services -> svc-de
       svc-nginx -> svc-de
