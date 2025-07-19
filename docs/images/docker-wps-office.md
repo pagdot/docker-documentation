@@ -478,7 +478,6 @@ To help with development, we generate this dependency graph.
       svc-xorg -> svc-de
       svc-de -> legacy-services
       init-services -> svc-docker
-      svc-de -> svc-docker
       svc-docker -> legacy-services
       init-services -> svc-nginx
       svc-nginx -> legacy-services
