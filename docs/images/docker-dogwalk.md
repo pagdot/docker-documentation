@@ -506,4 +506,5 @@ To help with development, we generate this dependency graph.
 
 ## Versions
 
+* **23.07.25:** - Bump DOGWALK to 1.0.2.
 * **14.07.25:** - Initial release.
