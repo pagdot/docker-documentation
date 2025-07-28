@@ -500,6 +500,7 @@ To help with development, we generate this dependency graph.
 
 ## Versions
 
+* **28.07.25:** - Fix CPU usage bug by disabling fake udev.
 * **12.07.25:** - Rebase to Selkies, HTTPS IS NOW REQUIRED.
 * **03.04.25:** - Update chromium launch options to improve performance.
 * **25.11.24:** - Rebase to Debian using official appimage, drop aarch64 support.
