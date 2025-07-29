@@ -318,24 +318,20 @@ To help with development, we generate this dependency graph.
       init-migrations -> init-adduser
       init-os-end -> init-config
       init-config -> init-config-end
+      init-crontab-config -> init-config-end
       init-ubooquity-config -> init-config-end
-      init-os-end -> init-crontab-config
+      init-config -> init-crontab-config
       init-mods-end -> init-custom-files
       init-adduser -> init-device-perms
       base -> init-envfile
       base -> init-migrations
-      base -> init-mods
       init-config-end -> init-mods
-      init-mods -> init-mods-end
       init-mods-package-install -> init-mods-end
       init-mods -> init-mods-package-install
-      base -> init-os-end
       init-adduser -> init-os-end
       init-device-perms -> init-os-end
       init-envfile -> init-os-end
-      init-migrations -> init-os-end
       init-custom-files -> init-services
-      init-mods-end -> init-services
       init-config -> init-ubooquity-config
       init-services -> svc-cron
       svc-cron -> legacy-services
@@ -343,13 +339,14 @@ To help with development, we generate this dependency graph.
       svc-ubooquity -> legacy-services
     }
     Base Images: {
-      "baseimage-alpine:3.20"
+      "baseimage-alpine:3.22"
     }
     "ubooquity:latest" <- Base Images
     ```
 
 ## Versions
 
+* **27.07.25:** - Rebase to Alpine 3.22.
 * **06.06.24:** - Rebase to Alpine 3.20.
 * **20.03.24:** - Rebase to Alpine 3.19.
 * **29.10.23:** - Bump JRE to 17 to support v3.
