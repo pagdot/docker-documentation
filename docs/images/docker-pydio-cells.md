@@ -307,39 +307,36 @@ To help with development, we generate this dependency graph.
       init-migrations -> init-adduser
       init-os-end -> init-config
       init-config -> init-config-end
+      init-crontab-config -> init-config-end
       init-pydio-cells-config -> init-config-end
-      init-os-end -> init-crontab-config
+      init-config -> init-crontab-config
       init-mods-end -> init-custom-files
       init-adduser -> init-device-perms
       base -> init-envfile
       base -> init-migrations
-      base -> init-mods
       init-config-end -> init-mods
-      init-mods -> init-mods-end
       init-mods-package-install -> init-mods-end
       init-mods -> init-mods-package-install
-      base -> init-os-end
       init-adduser -> init-os-end
       init-device-perms -> init-os-end
       init-envfile -> init-os-end
-      init-migrations -> init-os-end
       init-config -> init-pydio-cells-config
       init-custom-files -> init-services
-      init-mods-end -> init-services
       init-services -> svc-cron
       svc-cron -> legacy-services
       init-services -> svc-pydio-cells
       svc-pydio-cells -> legacy-services
     }
     Base Images: {
-      "baseimage-alpine:3.20"
+      "baseimage-alpine:3.22"
     }
     "pydio-cells:latest" <- Base Images
     ```
 
 ## Versions
 
-* **27.06.24:** - Rebasing to Alpine 3.20..
+* **27.07.25:** - Rebasing to Alpine 3.22.
+* **27.06.24:** - Rebasing to Alpine 3.20.
 * **14.03.24:** - Rebasing to alpine 3.19. Grpc port defaults to 8080.
 * **11.10.23:** - Rebasing to alpine 3.18. Build on alpine edge with Go 1.21.
 * **06.07.23:** - Deprecate armhf. As announced [here](https://www.linuxserver.io/blog/a-farewell-to-arm-hf)
