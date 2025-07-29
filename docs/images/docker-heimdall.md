@@ -81,6 +81,7 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Etc/UTC
+      - ALLOW_INTERNAL_REQUESTS=false #optional
     volumes:
       - /path/to/heimdall/config:/config
     ports:
@@ -97,6 +98,7 @@ docker run -d \
   -e PUID=1000 \
   -e PGID=1000 \
   -e TZ=Etc/UTC \
+  -e ALLOW_INTERNAL_REQUESTS=false `#optional` \
   -p 80:80 \
   -p 443:443 \
   -v /path/to/heimdall/config:/config \
@@ -122,6 +124,7 @@ Containers are configured using parameters passed at runtime (such as those abov
 | `PUID=1000` | for UserID - see below for explanation |
 | `PGID=1000` | for GroupID - see below for explanation |
 | `TZ=Etc/UTC` | specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List). |
+| `ALLOW_INTERNAL_REQUESTS=false` | By default, Heimdall blocks lookup requests to private or reserved IP addresses, if your instance is not exposed to the internet, or is behind some level of authentication, you can set this to `true` to allow requests to private IP addresses. |
 
 ### Volume Mappings (`-v`)
 
@@ -316,8 +319,9 @@ To help with development, we generate this dependency graph.
       init-nginx-end -> init-config
       init-os-end -> init-config
       init-config -> init-config-end
+      init-crontab-config -> init-config-end
       init-heimdall-config -> init-config-end
-      init-os-end -> init-crontab-config
+      init-config -> init-crontab-config
       init-mods-end -> init-custom-files
       init-adduser -> init-device-perms
       base -> init-envfile
@@ -325,25 +329,19 @@ To help with development, we generate this dependency graph.
       init-nginx-end -> init-heimdall-config
       init-php -> init-keygen
       base -> init-migrations
-      base -> init-mods
       init-config-end -> init-mods
-      init-version-checks -> init-mods
-      init-mods -> init-mods-end
       init-mods-package-install -> init-mods-end
       init-mods -> init-mods-package-install
       init-samples -> init-nginx
-      init-permissions -> init-nginx-end
-      base -> init-os-end
+      init-version-checks -> init-nginx-end
       init-adduser -> init-os-end
       init-device-perms -> init-os-end
       init-envfile -> init-os-end
-      init-migrations -> init-os-end
       init-keygen -> init-permissions
       init-nginx -> init-php
       init-folders -> init-samples
       init-custom-files -> init-services
-      init-mods-end -> init-services
-      init-config-end -> init-version-checks
+      init-permissions -> init-version-checks
       init-services -> svc-cron
       svc-cron -> legacy-services
       init-services -> svc-nginx
@@ -354,13 +352,14 @@ To help with development, we generate this dependency graph.
       svc-queue -> legacy-services
     }
     Base Images: {
-      "baseimage-alpine-nginx:3.20" <- "baseimage-alpine:3.20"
+      "baseimage-alpine-nginx:3.22" <- "baseimage-alpine:3.22"
     }
     "heimdall:latest" <- Base Images
     ```
 
 ## Versions
 
+* **20.07.25:** - Rebase to Alpine 3.22, enable PHP environment passthrough.
 * **27.06.24:** - Rebase to Alpine 3.20. Existing users should update their nginx confs to avoid http2 deprecation warnings.
 * **07.03.24:** - Enable the opcache and disable file revalidation.
 * **06.03.24:** - Existing users should update: site-confs/default.conf - Cleanup default site conf.
