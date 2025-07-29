@@ -321,13 +321,14 @@ To help with development, we generate this dependency graph.
       svc-raneto -> legacy-services
     }
     Base Images: {
-      "baseimage-alpine:3.21"
+      "baseimage-alpine:3.22"
     }
     "raneto:latest" <- Base Images
     ```
 
 ## Versions
 
+* **27.07.25:** - Rebase to Alpine 3.22.
 * **01.02.25:** - Rebase to Alpine 3.21.
 * **06.06.24:** - Rebase to Alpine 3.20.
 * **20.03.24:** - Rebase to Alpine 3.19.
